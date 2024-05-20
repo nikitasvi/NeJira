@@ -1,0 +1,17 @@
+@import '../../../assets/variables';
+
+.projects {
+	.nav {
+		display: flex;
+		justify-content: space-between;
+		padding: 40px 20px 0 20px;
+	}
+
+	.projects-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		grid-gap: 20px;
+		padding: 20px;
+		margin-top: 20px;
+	}
+}

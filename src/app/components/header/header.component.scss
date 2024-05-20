@@ -1,0 +1,17 @@
+@import '../../../assets/variables';
+
+.toolbar {
+	background-color: $background-color;
+	justify-content: space-between;
+	align-items: center;
+
+	.left-side {
+		display: flex;
+		align-items: center;
+	}
+
+	.right-side {
+		display: flex;
+		gap: 10px;
+	}
+}

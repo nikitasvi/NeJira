@@ -1,0 +1,47 @@
+<form [formGroup]="createProjectForm">
+	<h2 mat-dialog-title>Project creation</h2>
+	<mat-dialog-content class="content">
+		<mat-form-field>
+			<mat-label>Project name</mat-label>
+			<input matInput 
+				   formControlName="name"
+				   placeholder="Name your legendary project..." 
+				   cdkFocusInitial
+			>
+		</mat-form-field>
+	
+		<mat-form-field>
+			<mat-label>Project description</mat-label>
+			<textarea matInput
+					  formControlName="description"
+					  [style.height]="'200px'"  
+					  placeholder="Describe your project..."
+			></textarea>
+		</mat-form-field>
+		
+		<mat-form-field class="users">
+			<mat-chip-listbox #chipList>
+			  <mat-chip *ngFor="let user of selectedUsers" [removable]="true" (removed)="removeUser(user)">
+				<img matChipAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Photo of a Shiba Inu"/>
+				{{user.username}}
+				<mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+			  </mat-chip>
+			  <input
+				  matInput
+				placeholder="Search users"
+				[formControl]="userControl"
+				[matAutocomplete]="auto">
+			</mat-chip-listbox>
+			<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="addUser($event)">
+			  <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+				{{ user.username }}
+			  </mat-option>
+			</mat-autocomplete>
+		</mat-form-field>
+	</mat-dialog-content>
+	<mat-dialog-actions align="end">
+	  <button mat-button mat-dialog-close>Cancel</button>
+	  <button mat-raised-button color="primary" (click)="createProject()">Create</button>
+	</mat-dialog-actions>
+</form>
+

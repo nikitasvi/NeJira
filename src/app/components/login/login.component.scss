@@ -1,0 +1,35 @@
+@import '../../../assets/variables';
+
+.content {
+	width: 100vw;
+	height: calc(100vh - 100px);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.form {
+		width: 350px;
+		height: 500px;
+		border-radius: 8px;
+		background-color: $background-color;
+
+
+		&.form-centered {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.form-data {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+		}
+
+		.register {
+			margin: 5px 0;
+		}
+	}
+}

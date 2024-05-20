@@ -1,0 +1,28 @@
+@import '../../../../assets/variables';
+
+.card {
+	height: 200px;
+
+	.card-content {
+		display: flex;
+		flex-direction: column;
+		padding: 10px 15px;
+
+		.row {
+			margin: 5px 0 10px 0;
+
+			&.description {
+				height: 60px;
+
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis; 
+			}
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
+		background-color: $background-color-selected;
+	}
+}

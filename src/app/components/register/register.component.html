@@ -1,0 +1,23 @@
+<div class="content">
+	<div class="form form-centered">
+		<form [formGroup]="registerForm" class="form-data">
+			<mat-form-field>
+				<mat-label>Login</mat-label>
+				<input matInput placeholder="Enter your login" formControlName="login">
+			</mat-form-field>
+			<mat-form-field>
+				<mat-label>Email</mat-label>
+				<input matInput placeholder="Enter your email" formControlName="email">
+			</mat-form-field>
+			<mat-form-field>
+				<mat-label>Password</mat-label>
+				<input matInput placeholder="Enter your password" formControlName="password" [type]="hide ? 'password' : 'text'">
+				<a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+					<mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+				</a>
+			</mat-form-field>
+			<button type="submit" mat-flat-button color="primary" (click)="register()">Sign up</button>
+		</form>
+		<span class="register">Already have account? <a routerLink="/login">Login</a></span>
+	</div>
+</div>

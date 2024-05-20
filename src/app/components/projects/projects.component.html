@@ -1,0 +1,18 @@
+<div class="projects">
+	<div class="nav">
+		<h1 class="title">Your projects</h1>
+		<button mat-raised-button 
+				color="primary"
+				(click)="openDialog()"
+		>Create project</button>
+	</div>
+	<div class="projects-list">
+		<ng-container *ngFor="let project of projects">
+			<project [project]="project"></project>
+		</ng-container>
+		<!-- <project></project>
+		<project></project>
+		<project></project>
+		<project></project> -->
+	</div>
+</div>
