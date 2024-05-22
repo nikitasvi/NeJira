@@ -26,7 +26,7 @@ export class ProjectsComponent implements OnInit {
         const dialogRef = this.dialog.open(CreateProjectDialogComponent, {
             height: '600px',
             width: '800px',
-          });
+        });
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);

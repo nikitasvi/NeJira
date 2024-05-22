@@ -8,11 +8,7 @@
 	</div>
 	<div class="projects-list">
 		<ng-container *ngFor="let project of projects">
-			<project [project]="project"></project>
+			<project [project]="project" [routerLink]="['/projects', project._id]"></project>
 		</ng-container>
-		<!-- <project></project>
-		<project></project>
-		<project></project>
-		<project></project> -->
 	</div>
 </div>

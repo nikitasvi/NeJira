@@ -16,4 +16,8 @@ export class ProjectService {
 	public getProjects() {
 		return this.apiService.get<Array<Project>>('api/projects');
 	}
+
+	public deleteProject(id: string) {
+		return this.apiService.delete(`api/projects/${id}`);
+	}
 }

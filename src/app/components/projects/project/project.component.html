@@ -1,12 +1,15 @@
 <mat-card class="card">
 	<mat-card-header>
-	  <mat-card-title-group>
-		<mat-card-title>{{ project.name }}</mat-card-title>
-		<mat-card-subtitle>{{ project.creator.username }}</mat-card-subtitle>
-	  </mat-card-title-group>
+		<mat-card-title-group>
+			<mat-card-title>{{ project.name }}</mat-card-title>
+			<mat-card-subtitle>Created by: {{ project.creator.username }}</mat-card-subtitle>
+		</mat-card-title-group>
 	</mat-card-header>
 	<mat-card-content class="card-content">
 		<div class="row description">{{ project.description }}</div>
-	  	<div class="row date">{{ project.creationDate | date:'medium' }}</div>
+		<div class="row date">{{ project.creationDate | date:'medium' }}</div>
 	</mat-card-content>
+	<mat-card-footer>
+		<button mat-raised-button color="primary" (click)="deleteProject($event)">delete</button>
+	</mat-card-footer>
 </mat-card>

@@ -1,0 +1,22 @@
+.board {
+	height: 100vh;
+	width: 100%;
+	background-color: rgb(211, 201, 14);
+
+	.board-main {
+		height: 100%;
+		padding: 20px;
+		background-color: aquamarine;
+	
+		.board-header {
+			height: 150px;
+			background-color: blue;
+		}
+	
+		.board-content {
+			height: 100%;
+			background-color: chartreuse;
+		}
+	}
+}
+
