@@ -1,6 +1,6 @@
 @import '../../../assets/variables';
 
-.board {
+.tasks {
 	min-height: calc(100vh - 100px);
 	display: flex;
 
@@ -35,7 +35,7 @@
 					margin: 0;
 				}
 
-				&:hover {
+				&:hover, &.active {
 					background-color: $background-color-selected;
 				}
 			}
@@ -66,6 +66,8 @@
 			}
 
 			.board-sprint-info {
+				display: flex;
+				justify-content: space-between;
 
 				.board-text-info {
 					.board-title {
@@ -101,37 +103,43 @@
 				}
 			}
 
-			.content {
-				.task-board {
-					display: flex;
-					justify-content: space-around;
-				}
-				  
-				.column {
-					width: 30%;
-					padding: 10px;
-					border: 1px solid #ccc;
-					border-radius: 5px;
-					background-color: #f9f9f9;
-				}
-				  
-				.task-list {
-					min-height: 200px;
-				}
-				  
-				.task {
-					padding: 10px;
-					margin: 5px 0;
-					background-color: #fff;
-					border: 1px solid #ddd;
-					border-radius: 5px;
-					cursor: grab;
+			.tasks-list {
+				display: flex;
+				flex-direction: column;
 
-					.placeholder {
-						background: #ccc;
-						border: dotted 3px #999;
-						min-height: 60px;
-						transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+				.card {
+					background-color: $background-color;
+					border-radius: 8px;
+					padding: 10px 20px;
+					margin: 5px 0;
+
+					display: flex;
+					gap: 20px;
+					border: 2px solid transparent;
+
+					&.header {
+						margin: 20px 0;
+						pointer-events: none;
+					}
+
+					h2, h3 {
+						margin: 0;
+					}
+
+					.title {
+						width: 60%;
+					}
+
+					.status {
+						width: 20%;
+					}
+
+					.assignee {
+						width: 10%;
+					}
+
+					&:hover {
+						border: 2px solid $dark-color;
 					}
 				}
 			}
@@ -139,18 +147,3 @@
 	}
 }
 
-.cdk-drag-preview {
-	box-sizing: border-box;
-	border-radius: 4px;
-	box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-				0 8px 10px 1px rgba(0, 0, 0, 0.14),
-				0 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
-
-.cdk-drag-animating {
-	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.task-list.cdk-drop-list-dragging .task:not(.cdk-drag-placeholder) {
-	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}

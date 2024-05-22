@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
@@ -26,6 +27,11 @@ import { ProjectComponent } from "./components/projects/project/project.componen
 import { CreateProjectDialogComponent } from "./shared/create-project-dialog/create-project-dialog.component";
 import { ProjectService } from "./services/project.service";
 import { UserService } from "./services/users.service";
+import { BoardComponent } from "./components/board/board.component";
+import { TaskDialogComponent } from "./shared/task-dialog/task-dialog.component";
+import { TasksService } from "./services/tasks.service";
+import { TasksComponent } from "./components/tasks/tasks.component";
+import { FilterByStatusPipe } from "./pipes/filter-by-status.pipe";
 
 
 
@@ -38,7 +44,11 @@ import { UserService } from "./services/users.service";
 		ProjectsComponent,
 		HeaderComponent,
 		ProjectComponent,
-		CreateProjectDialogComponent
+		CreateProjectDialogComponent,
+		BoardComponent,
+		TasksComponent,
+		TaskDialogComponent,
+		FilterByStatusPipe
 	],
 	imports: [
 		BrowserModule,
@@ -54,14 +64,16 @@ import { UserService } from "./services/users.service";
 		MatSelectModule,
 		MatChipsModule,
 		MatAutocompleteModule,
-		HttpClientModule
+		HttpClientModule,
+		DragDropModule
 	],
 	providers: [
     	provideAnimationsAsync(),
 		ApiService,
 		AuthService,
 		ProjectService,
-		UserService
+		UserService,
+		TasksService
   	],
 })
 export class AppModule { }

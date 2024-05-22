@@ -1,0 +1,64 @@
+<div class="tasks">
+	<div class="sidebar">
+		<div class="project-info">
+			<h2 class="project-name">
+				Project name
+			</h2>
+			<div class="project-title">
+				Software Development Project
+			</div>
+		</div>
+		<div class="nav">
+			<div class="nav-item active">
+				<h4>Backlog</h4>
+			</div>
+		</div>
+	</div>
+	<div class="board-main">
+		<div class="board-header">
+			<h3 class="board-route">
+				<a class="clickable" routerLink='/projects'>Projects</a>
+				<p>/</p>
+				<a>Project Name</a>
+				<p>/</p>
+				<a>Sprint name</a>
+			</h3>
+	
+			<div class="board-sprint-info">
+				<div class="board-text-info">
+					<h1 class="board-title">Backlog</h1>
+				</div>
+				<div class="actions">
+					<button mat-raised-button color="primary" (click)="openDialog()">Create new task</button>
+				</div>
+			</div>
+		</div>
+		<div class="board-content">
+			<div class="no-content" *ngIf="tasks.length <= 0">
+				<div class="start-sprint">
+					<h2>No tasks here. Time to start!</h2>
+					<button mat-raised-button color="primary" (click)="openDialog()">Create new task</button>
+				</div>
+			</div>
+			<div class="tasks-list">
+				<div class="card header">
+					<div class="title"><h2>Task name</h2></div>
+					<div class="status"><h2>Task status</h2></div>
+					<div class="assignee"><h2>Assigned to</h2></div>
+				</div>
+				<ng-container *ngFor="let task of tasks">
+					<div class="card">
+						<div class="title"><h3>{{ task.name }}</h3></div>
+						<div class="status"><h3>{{ task.status }}</h3></div>
+						<div class="assignee">
+							<mat-chip>
+								<img matChipAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Photo of a Shiba Inu"/>
+								<h3>{{ task.assignedTo?.username }}</h3>
+							</mat-chip>
+						</div>
+					</div>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+</div>

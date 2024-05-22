@@ -1,4 +1,6 @@
 const Project = require('../models/project');
+const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 const createProject = async (req, res) => {
 	try {
@@ -20,14 +22,58 @@ const getProjects = async (req, res) => {
 	try {
 		const projects = await Project.find()
 			.populate('creator')
+			.populate('tasks')
             .populate('allowedUsers')
             .exec();
 
 			// .populate('sprints')
-			// .populate('tasks')
 		res.status(200).json(projects);
 	} catch (error) {
 		res.status(500).json({ error: error.message });
+	}
+};
+
+const getUserProjects = async (req, res) => {
+	const token = req.header('Authorization').replace('Bearer ', '');
+	const decoded = jwt.verify(token, 'very_secret_key');
+	const userId = decoded.id;
+
+    try {
+        const projects = await Project.find({
+            $or: [
+                { creator: userId },
+                { allowedUsers: userId }
+            ]
+        })
+        .populate('creator')
+        .populate('tasks')
+        .populate('allowedUsers')
+        .exec();
+
+        res.status(200).json(projects);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+const getProject = async (req, res) => {
+	const id = req.params.id;
+  
+	try {
+		const project = await Project.findById(id)
+			.populate('creator')
+			.populate('tasks')
+			.populate('allowedUsers')
+			.exec();
+
+			// .populate('sprints')
+		if (!project) {
+			return res.status(404).json({ error: 'Project not found' });
+		}
+	
+		res.status(200).json(project);
+	} catch (error) {
+	  	res.status(500).json({ error: error.message });
 	}
 };
 
@@ -47,5 +93,7 @@ const deleteProject = async (req, res) => {
 module.exports = {
 	createProject,
 	getProjects,
+	getUserProjects,
+	getProject,
 	deleteProject
 }

@@ -7,8 +7,6 @@ import { User } from '../models/user.model';
   	providedIn: 'root'
 })
 export class AuthService {
-	private user: User | null = null;
-
 	constructor(
 		private readonly api: ApiService,
 		private readonly router: Router
@@ -22,16 +20,15 @@ export class AuthService {
 		return this.api.post(`api/auth/login`, { username, password });
 	}
 
-	public saveUser(user: User): void {
-		this.user = user;
+	public static saveUser(user: User): void {
+		localStorage.setItem('user', JSON.stringify(user));
 	}
 
-	public get currentUser(): User {
-		if (!this.user) {
-			throw Error('User not logged in');
-		}
-		
-		return this.user;
+	public static getUser(): User {
+		const user = localStorage.getItem('user');
+		return user ?
+			JSON.parse(user) :
+			console.error('User not logged in');
 	}
 
 	public static saveToken(token: string): void {

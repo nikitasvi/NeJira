@@ -10,6 +10,6 @@
 		<div class="row date">{{ project.creationDate | date:'medium' }}</div>
 	</mat-card-content>
 	<mat-card-footer>
-		<button mat-raised-button color="primary" (click)="deleteProject($event)">delete</button>
+		<button mat-icon-button color="primary" (click)="deleteProject($event)"><mat-icon>delete</mat-icon></button>
 	</mat-card-footer>
 </mat-card>

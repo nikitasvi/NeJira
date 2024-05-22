@@ -21,10 +21,10 @@
 		
 		<mat-form-field class="users">
 			<mat-chip-listbox #chipList>
-			  <mat-chip *ngFor="let user of selectedUsers" [removable]="true" (removed)="removeUser(user)">
+			  <mat-chip *ngFor="let user of selectedUsers" [removable]="user._id !== currentUser._id" (removed)="removeUser(user)">
 				<img matChipAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Photo of a Shiba Inu"/>
 				{{user.username}}
-				<mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+				<mat-icon matChipRemove *ngIf="user._id !== currentUser._id">cancel</mat-icon>
 			  </mat-chip>
 			  <input
 				  matInput

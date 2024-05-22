@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const TaskSchema = require('../models/task').Schema;
 
 const Schema = mongoose.Schema;
 

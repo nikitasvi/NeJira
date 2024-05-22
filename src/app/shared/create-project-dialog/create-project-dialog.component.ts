@@ -5,6 +5,7 @@ import { UserService } from '../../services/users.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-create-project-dialog',
@@ -12,11 +13,12 @@ import { AuthService } from '../../services/auth.service';
     styleUrl: './create-project-dialog.component.scss'
 })
 export class CreateProjectDialogComponent implements OnInit {
+    public currentUser: User = AuthService.getUser();
+
     public allUsers: Array<User> = [];
-    public selectedUsers: Array<User> = [];
+    public selectedUsers: Array<User> = [this.currentUser];
 
     public userControl: FormControl = new FormControl('');
-
     public filteredUsers!: Observable<User[]>;
 
     public createProjectForm: FormGroup = new FormGroup({
@@ -25,9 +27,9 @@ export class CreateProjectDialogComponent implements OnInit {
     });
 
     constructor(
-        private readonly authService: AuthService,
         private readonly projectService: ProjectService,
-        private readonly usersService: UserService
+        private readonly usersService: UserService,
+        private readonly dialogRef: MatDialogRef<CreateProjectDialogComponent>
     ) { }
 
     public async ngOnInit(): Promise<void> {
@@ -39,11 +41,12 @@ export class CreateProjectDialogComponent implements OnInit {
     }
 
     public createProject(): void {
-        const currentUser = this.authService.currentUser;
+        const currentUser = AuthService.getUser();
         const name = this.createProjectForm.controls['name'].value;
         const description = this.createProjectForm.controls['description'].value;
 
-        this.projectService.createProject({ creator: currentUser._id, name: name, description: description, allowedUsers: this.selectedUsers });
+        this.projectService.createProject({ creator: currentUser._id, name: name, description: description, allowedUsers: this.selectedUsers })
+            .then(() => this.dialogRef.close());
     }
 
     private _filter(value: any): User[] {

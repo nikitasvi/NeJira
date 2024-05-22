@@ -1,10 +1,79 @@
 <div class="board">
+	<div class="sidebar">
+		<div class="project-info">
+			<h2 class="project-name">
+				{{ project?.name }}
+			</h2>
+			<div class="project-title">
+				Software Development Project
+			</div>
+		</div>
+		<div class="nav">
+			<div class="nav-item" [routerLink]="['tasks']">
+				<h4>Backlog</h4>
+			</div>
+		</div>
+	</div>
 	<div class="board-main">
 		<div class="board-header">
+			<h3 class="board-route">
+				<a class="clickable" routerLink='/projects'>Projects</a>
+				<p>/</p>
+				<a>{{ project?.name }}</a>
+				<p>/</p>
+				<a>Sprint name</a>
+			</h3>
 
+			<div class="board-sprint-info">
+				<div class="board-text-info">
+					<h1 class="board-title">Sprint name  (to do: implements sprints functionality)</h1>
+					<h4 class="board-description">Sprint desc</h4>
+				</div>
+
+			</div>
 		</div>
 		<div class="board-content">
-	
+			<div class="no-content" *ngIf="project?.tasks?.length === 0">
+				<div class="start-sprint">
+					<h2>Plan your sprint to see tasks here.</h2>
+					<button mat-raised-button color="primary">Start new sprint</button>
+				</div>
+			</div>
+			<div class="content">
+				<div class="task-board">
+					<!-- <div class="column" *ngFor="let status of taskStatuses">
+						<h3>{{ status | titlecase }}</h3>
+						<div
+							cdkDropList
+							[cdkDropListData]="getTasksByStatus(status)"
+							class="task-list"
+							(cdkDropListDropped)="onDrop($event, status)">
+							<div class="task" *ngFor="let task of getTasksByStatus(status)" cdkDrag>
+								{{ task.name }}
+							</div>
+						</div>
+					</div> -->
+
+					<div class="column" cdkDropList (cdkDropListDropped)="onDrop($event, 'todo')">
+						<h2>TODO</h2>
+						<div *ngFor="let task of projectTasks | filterByStatus: 'todo'" class="task" cdkDrag>
+							{{ task.name }}
+							</div>
+						</div>
+						<div class="column" cdkDropList (cdkDropListDropped)="onDrop($event, 'inProgress')">
+							<h2>In Progress</h2>
+							<div *ngFor="let task of projectTasks | filterByStatus: 'inProgress'" class="task" cdkDrag>
+							{{ task.name }}
+							</div>
+						</div>
+						<div class="column" cdkDropList (cdkDropListDropped)="onDrop($event, 'done')">
+							<h2>Done</h2>
+							<div *ngFor="let task of projectTasks | filterByStatus: 'done'" class="task" cdkDrag>
+							{{ task.name }}
+						</div>
+					</div>		
+				</div>		 
+			</div>
 		</div>
 	</div>
 </div>

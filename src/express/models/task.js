@@ -12,6 +12,7 @@ const TaskSchema = new Schema({
 	status: { type: String, enum: taskStatuses, default: 'todo' },
 	creationDate: { type: Date, default: Date.now },
 	updatingDate: { type: Date, default: Date.now },
+	assignedTo: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 const Task = mongoose.model('Task', TaskSchema, 'tasks');

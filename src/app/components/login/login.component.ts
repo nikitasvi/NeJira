@@ -28,7 +28,7 @@ export class LoginComponent {
             .then((res) =>  {
                 if (res.token) {
                     AuthService.saveToken(res.token);
-                    this.authService.saveUser(res.user);
+                    AuthService.saveUser(res.user);
                     this.router.navigate(['/projects']);
                 }
             })

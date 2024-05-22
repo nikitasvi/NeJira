@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -7,8 +7,16 @@ import { Router } from '@angular/router';
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
     constructor(private readonly router: Router) { }
+    
+    public ngOnInit(): void {
+        const isLoggedIn = AuthService.isLoggedIn();
+
+        if (!isLoggedIn) {
+            this.logout();
+        }
+    }
 
     public get isLoggedIn(): boolean {
         return AuthService.isLoggedIn();

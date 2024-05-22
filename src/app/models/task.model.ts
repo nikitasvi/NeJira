@@ -1,3 +1,5 @@
+import { User } from "./user.model";
+
 export class Task {
     public _id!: string;
     public projectId!: string;
@@ -7,6 +9,7 @@ export class Task {
     public status: TaskStatus = TaskStatus.TODO;
     public creationDate!: Date;
     public updatingDate!: Date;
+    public assignedTo: User | null = null; 
 }
 
 export enum TaskStatus {
