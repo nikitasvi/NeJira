@@ -45,6 +45,7 @@
 					<div class="title"><h2>Task name</h2></div>
 					<div class="status"><h2>Task status</h2></div>
 					<div class="assignee"><h2>Assigned to</h2></div>
+					<div class="edit"></div>
 				</div>
 				<ng-container *ngFor="let task of tasks">
 					<div class="card">
@@ -55,6 +56,12 @@
 								<img matChipAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Photo of a Shiba Inu"/>
 								<h3>{{ task.assignedTo?.username }}</h3>
 							</mat-chip>
+						</div>
+						<div class="edit">
+							<button mat-raised-button color="primary" (click)="openDialog(task)">Edit</button>
+						</div>
+						<div class="delete">
+							<button mat-raised-button color="warn" (click)="deleteTask(task)">Delete</button>
 						</div>
 					</div>
 				</ng-container>

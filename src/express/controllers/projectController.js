@@ -77,6 +77,21 @@ const getProject = async (req, res) => {
 	}
 };
 
+const updateProject = async (req, res) => {
+	try {
+		const { _id, name, description, allowedUsers } = req.body;
+		const projectData = { name, description, allowedUsers };
+
+		const project = await Project.findByIdAndUpdate(_id, projectData, { new: true });
+		if (!project) {
+			return res.status(404).json({ error: 'Project not found' });
+		}
+		res.status(200).json(project);
+	} catch (error) {
+	  	res.status(500).json({ error: error.message });
+	}
+};
+
 const deleteProject = async (req, res) => {
 	try {
 		const project = await Project.findByIdAndDelete(req.params.id);
@@ -95,5 +110,6 @@ module.exports = {
 	getProjects,
 	getUserProjects,
 	getProject,
+	updateProject,
 	deleteProject
 }

@@ -18,30 +18,29 @@ export class TaskDialogComponent {
     public allowedUsers: Array<User> = [];
     private projectId: string = '';
     public project!: Project | null;
+    private task!: Task | null;
 
     constructor(
         public dialogRef: MatDialogRef<TaskDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any,
+        @Inject(MAT_DIALOG_DATA) public data: Task | null,
         private fb: FormBuilder,
         private readonly projectService: ProjectService,
         private readonly tasksService: TasksService,
     ) {
         this.taskForm = this.fb.group({
-            name: [data.name, Validators.required],
-            description: [data.description],
-            status: [data.status, Validators.required],
-            assignedTo: [data.assignedTo]
+            name: [data?.name, Validators.required],
+            description: [data?.description],
+            status: [data?.status, Validators.required],
+            assignedTo: [data?.assignedTo?.username ?? null]
         });
     }
 
     public ngOnInit(): void {
-        if (this.data.projectId) {
-            this.projectId = this.data.projectId;
-        } else {
-            this.projectId = this.data.task.projectId;
-        }
+        if (this.data?.status) {        // TODO: Remove this cringe condition
+            this.task = this.data;
+        }        
 
-        console.log(this.projectId);
+        this.projectId = this.data?.projectId ?? '';
 
         this.projectService.getProject(this.projectId).then(project => {
             this.project = project;
@@ -52,17 +51,26 @@ export class TaskDialogComponent {
     public onSave(): void {
         if (this.taskForm.valid) {
             try {
-                const projectData = {
-                    projectId: this.projectId,
-                    name: this.taskForm.value.name,
-                    description: this.taskForm.value.description,
-                    status: this.taskForm.value.status,
-                    assignedTo: this.taskForm.value.assignedTo
-                }
+                if (this.task) {
+                    this.task.name = this.taskForm.value.name;
+                    this.task.description = this.taskForm.value.description;
+                    this.task.status = this.taskForm.value.status;
+                    this.task.assignedTo = this.taskForm.value.assignedTo;
 
-                this.tasksService.createTask(projectData).then(() => this.dialogRef.close({ ...this.data, ...this.taskForm.value }));
+                    this.tasksService.updateTask(this.task).then(() => this.dialogRef.close({ ...this.data, ...this.taskForm.value }));
+                } else {
+                    const projectData = {
+                        projectId: this.projectId,
+                        name: this.taskForm.value.name,
+                        description: this.taskForm.value.description,
+                        status: this.taskForm.value.status,
+                        assignedTo: this.taskForm.value.assignedTo
+                    }
+
+                    this.tasksService.createTask(projectData).then(() => this.dialogRef.close({ ...this.data, ...this.taskForm.value }));
+                }           
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
         }
     }

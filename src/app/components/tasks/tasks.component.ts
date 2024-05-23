@@ -20,7 +20,6 @@ export class TasksComponent implements OnInit {
     constructor(
         private readonly dialog: MatDialog,
         private readonly activeRoute: ActivatedRoute,
-        private readonly projectService: ProjectService,
         private readonly tasksService: TasksService
     ) {}
 
@@ -31,16 +30,20 @@ export class TasksComponent implements OnInit {
     
     public openDialog(task?: Task) {
         const dialogRef = this.dialog.open(TaskDialogComponent, {
-              width: '250px',
+              width: '350px',
               data: task ? task : { projectId: this.projectId }
         });
       
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(async result => {
             if (result) {
-              // Обработка сохраненного результата
-              console.log('Task saved/edited:', result);
+                this.tasks = await this.tasksService.getTasks(this.projectId);
             }
         });
+    }
+
+    public deleteTask(task: Task) {
+        this.tasksService.deleteTask(task.projectId, task._id)
+            .then(async () => this.tasks = await this.tasksService.getTasks(this.projectId));
     }
 }
 

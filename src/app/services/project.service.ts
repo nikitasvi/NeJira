@@ -9,7 +9,6 @@ export class ProjectService {
 	constructor(private readonly apiService: ApiService) { }
 
 	public createProject(project: any): Promise<any> {
-		debugger
 		return this.apiService.post('api/projects', project);
 	}
 
@@ -19,6 +18,10 @@ export class ProjectService {
 
 	public getProject(id: string) {
 		return this.apiService.get<Project>(`api/projects/${id}`);
+	}
+
+	public updateProject(project: Project) {
+		return this.apiService.put(`api/projects/${project._id}`, project);
 	}
 
 	public deleteProject(id: string) {

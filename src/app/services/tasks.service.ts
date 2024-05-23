@@ -23,7 +23,7 @@ export class TasksService {
 	// 	return this.apiService.patch<void>(`api/projects/${task.projectId}/tasks/${taskId}/status`, { status }).toPromise();
 	// }
 
-	public deleteTask(projectId: string, taskId: number): Promise<any> {
+	public deleteTask(projectId: string, taskId: string): Promise<any> {
 		return this.apiService.delete(`api/projects/${projectId}/tasks/${taskId}`);
 	}
 }

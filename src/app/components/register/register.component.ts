@@ -26,11 +26,7 @@ export class RegisterComponent {
         const email = this.registerForm.controls['email'].value;
         const password = this.registerForm.controls['password'].value;
       
-        console.log('register call');
         this.authService.register(login, email, password)
-            .then(() =>  {
-                console.log('login success');
-                this.router.navigate(['/login']);
-            })
+            .then(() =>  this.router.navigate(['/login']));
     }
 }

@@ -22,10 +22,11 @@ export class ProjectsComponent implements OnInit {
         console.log('projects', this.projects);
     }
     
-    public openDialog(): void {
+    public openDialog(project?: Project): void {
         const dialogRef = this.dialog.open(CreateProjectDialogComponent, {
             height: '600px',
             width: '800px',
+            data: project
         });
 
         dialogRef.afterClosed().subscribe(result => {
