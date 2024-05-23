@@ -19,7 +19,6 @@ export class ProjectsComponent implements OnInit {
 
     public ngOnInit(): void {
         this.getProjects();
-        console.log('projects', this.projects);
     }
     
     public openDialog(project?: Project): void {

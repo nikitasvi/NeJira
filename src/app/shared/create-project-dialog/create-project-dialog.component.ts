@@ -52,8 +52,7 @@ export class CreateProjectDialogComponent implements OnInit {
         this.selectedUsers = project.allowedUsers;
     }
 
-    public onSave(): void {
-        debugger
+    public onSave(): void {     
         if (this.data) {
             this.data.name = this.createProjectForm.controls['name'].value;
             this.data.description = this.createProjectForm.controls['description'].value;
