@@ -49,18 +49,22 @@ export class BoardComponent implements OnInit {
         }
     }
 
-    public onDrop(event: CdkDragDrop<Task[]>, newStatus: 'todo' | 'inProgress' | 'done') {
-        debugger
+    public async onDrop(event: CdkDragDrop<Task>, newStatus: 'todo' | 'inProgress' | 'done'): Promise<void> {
+        //debugger
+        if (event.previousContainer === event.container) {
+            return;
+        }
+
         const taskToMove = event.item.data;
         taskToMove.status = newStatus;
         // You may need to call an API to update the task status in the backend
         // Assuming you have a method like updateTaskStatus in your service
-        this.tasksService.updateTask(taskToMove).then(() => {
-          // Task status updated successfully
-          console.log('done');
+        this.tasksService.updateTask(taskToMove).then(async () => {
+            // Task status updated successfully
+            this.projectTasks = await this.tasksService.getTasks(this.projectId);
         }, error => {
-          // Handle error
-          console.error(error);
+            // Handle error
+            console.error(error);
         });
     }
 

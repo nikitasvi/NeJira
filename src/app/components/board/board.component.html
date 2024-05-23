@@ -40,38 +40,28 @@
 				</div>
 			</div>
 			<div class="content">
-				<div class="task-board">
-					<!-- <div class="column" *ngFor="let status of taskStatuses">
-						<h3>{{ status | titlecase }}</h3>
-						<div
-							cdkDropList
-							[cdkDropListData]="getTasksByStatus(status)"
-							class="task-list"
-							(cdkDropListDropped)="onDrop($event, status)">
-							<div class="task" *ngFor="let task of getTasksByStatus(status)" cdkDrag>
-								{{ task.name }}
-							</div>
-						</div>
-					</div> -->
-
+				<div class="task-board" cdkDropListGroup>
 					<div class="column" cdkDropList (cdkDropListDropped)="onDrop($event, 'todo')">
-						<h2>TODO</h2>
-						<div *ngFor="let task of projectTasks | filterByStatus: 'todo'" class="task" cdkDrag>
-							{{ task.name }}
-							</div>
-						</div>
-						<div class="column" cdkDropList (cdkDropListDropped)="onDrop($event, 'inProgress')">
-							<h2>In Progress</h2>
-							<div *ngFor="let task of projectTasks | filterByStatus: 'inProgress'" class="task" cdkDrag>
-							{{ task.name }}
-							</div>
-						</div>
-						<div class="column" cdkDropList (cdkDropListDropped)="onDrop($event, 'done')">
-							<h2>Done</h2>
-							<div *ngFor="let task of projectTasks | filterByStatus: 'done'" class="task" cdkDrag>
+						<h2>To do</h2>
+						<div *ngFor="let task of projectTasks | filterByStatus: 'todo'" class="task" cdkDrag [cdkDragData]="task">
+							<div class="placeholder" *cdkDragPlaceholder></div>
 							{{ task.name }}
 						</div>
-					</div>		
+					</div>
+					<div class="column" cdkDropList (cdkDropListDropped)="onDrop($event, 'inProgress')">
+						<h2>In Progress</h2>
+						<div *ngFor="let task of projectTasks | filterByStatus: 'inProgress'" class="task" cdkDrag [cdkDragData]="task">
+							<div class="placeholder" *cdkDragPlaceholder></div>
+							{{ task.name }}
+						</div>
+					</div>
+					<div class="column" cdkDropList (cdkDropListDropped)="onDrop($event, 'done')">
+						<h2>Done</h2>
+						<div *ngFor="let task of projectTasks | filterByStatus: 'done'" class="task" cdkDrag [cdkDragData]="task">
+							<div class="placeholder" *cdkDragPlaceholder></div>
+							{{ task.name }}
+						</div>
+					</div>	
 				</div>		 
 			</div>
 		</div>
