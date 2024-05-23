@@ -1,27 +1,75 @@
-# NeJira
+# Title  
+Богоподобный клон Jira. Angular 16 + Express 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+Реализована авторизация через jwt, CRUD.
+Захардкожен за 2 дня, прошу не судить строго)
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### TODO  
+Develop sprints functionality.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Screenshots  
 
-## Build
+Projects page
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![screenshot](screenshots/projects.png)
 
-## Running unit tests
+Board page
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![screenshot](screenshots/board.png)
 
-## Running end-to-end tests
+Backlog page
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![screenshot](screenshots/backlog.png)
 
-## Further help
+## Tech Stack
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+**Client:** Angular 16, Angular Material
+
+**Server:** Node, Express, MongoDB
+
+## Features  
+
+- Auth 
+- Work with projects  
+- Work with tasks  
+- Drag & Drop
+
+## Run Locally  
+
+Clone the project  
+
+~~~bash  
+  git clone https://github.com/nikitasvi/NeJira
+~~~
+
+Go to the project directory  
+
+~~~bash  
+  cd NeJira
+~~~
+
+Install dependencies  
+
+~~~bash  
+npm install
+~~~
+
+Start client  
+
+~~~bash  
+ng serve
+~~~
+
+Go to backend path 
+
+~~~bash  
+cd src/express
+~~~
+
+Start server  
+
+~~~bash  
+node server.js
+~~~ 
